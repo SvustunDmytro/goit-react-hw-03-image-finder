@@ -13,6 +13,7 @@ class App extends Component {
     query: 'car',
     page: 1,
     totalHits: [],
+    scroll: 1500,
   };
 
   componentDidMount() {
@@ -37,11 +38,13 @@ class App extends Component {
     if (prevState.page !== page) {
       this.fetchImages().then(data =>
         this.setState(state => ({
-          ...state,
-          totalHits: data.hits,
+          totalHits: [...state.totalHits, ...data.hits],
+          scroll: state.scroll + 1500,
         })),
       );
     }
+
+    window.scrollTo({ top: prevState.scroll + 1500, behavior: 'smooth' });
   }
 
   fetchImages = () => {
