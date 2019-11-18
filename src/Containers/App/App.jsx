@@ -10,18 +10,21 @@ const URL =
 
 class App extends Component {
   state = {
-    query: 'car',
+    query: '',
     page: 1,
     totalHits: [],
     scroll: 1500,
   };
 
   componentDidMount() {
-    this.fetchImages().then(data =>
-      this.setState({
-        totalHits: data.hits,
-      }),
-    );
+    const { query } = this.state;
+    if (query) {
+      this.fetchImages().then(data =>
+        this.setState({
+          totalHits: data.hits,
+        }),
+      );
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -35,7 +38,7 @@ class App extends Component {
         })),
       );
     }
-    if (prevState.page !== page) {
+    if (prevState.page !== page && query) {
       this.fetchImages().then(data =>
         this.setState(state => ({
           totalHits: [...state.totalHits, ...data.hits],
@@ -66,7 +69,9 @@ class App extends Component {
   };
 
   handleClick = () => {
-    this.setState(state => ({ ...state, page: state.page + 1 }));
+    if (this.state.query) {
+      this.setState(state => ({ ...state, page: state.page + 1 }));
+    }
   };
 
   render() {
