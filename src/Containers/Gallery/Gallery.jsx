@@ -8,19 +8,13 @@ import PhotoCard from '../../Components/PhotoCard/PhotoCard';
 class Gallery extends Component {
   state = {
     isLarge: false,
-    filtredPicture: '',
+    fullScrinPicture: '',
   };
 
-  pictureZoom = e => {
-    const { totalHits } = this.props;
-    const link = e.target.parentNode.parentNode.firstChild.src;
-
-    const filtredPicture = totalHits.find(
-      element => element.webformatURL === link,
-    );
+  pictureZoom = el => {
     this.setState({
       isLarge: true,
-      filtredPicture,
+      fullScrinPicture: el,
     });
   };
 
@@ -30,13 +24,13 @@ class Gallery extends Component {
 
   render() {
     const { totalHits, handleClick } = this.props;
-    const { isLarge, filtredPicture } = this.state;
+    const { isLarge, fullScrinPicture } = this.state;
     return (
       <div className={styles.GalleryWrapper}>
         <ul className={styles.gallery}>
           <PhotoCard totalHits={totalHits} pictureZoom={this.pictureZoom} />
           {isLarge && (
-            <Modal onClose={this.onClose} filtredPicture={filtredPicture} />
+            <Modal onClose={this.onClose} fullScrinPicture={fullScrinPicture} />
           )}
         </ul>
         <button type="button" className={styles.button} onClick={handleClick}>

@@ -30,7 +30,7 @@ const PhotoCard = ({ totalHits, pictureZoom }) => (
           <button
             type="button"
             className={styles.fullscreen__button}
-            onClick={pictureZoom}
+            onClick={() => pictureZoom(el)}
           >
             <i className="material-icons">zoom_out_map</i>
           </button>
@@ -52,10 +52,6 @@ PhotoCard.propTypes = {
     }),
   ).isRequired,
   pictureZoom: PropTypes.func.isRequired,
-};
-
-PhotoCard.defaultProps = {
-  // bla: 'test',
 };
 
 export default PhotoCard;

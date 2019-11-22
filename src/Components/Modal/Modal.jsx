@@ -30,7 +30,7 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { filtredPicture } = this.props;
+    const { fullScrinPicture } = this.props;
     return (
       <div
         role="presentation"
@@ -39,7 +39,10 @@ export default class Modal extends Component {
         ref={this.overlayRef}
       >
         <div className={styles.modal}>
-          <img src={filtredPicture.largeImageURL} alt={filtredPicture.tags} />
+          <img
+            src={fullScrinPicture.largeImageURL}
+            alt={fullScrinPicture.tags}
+          />
         </div>
       </div>
     );
@@ -48,7 +51,7 @@ export default class Modal extends Component {
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  filtredPicture: PropTypes.shape({
+  fullScrinPicture: PropTypes.shape({
     id: PropTypes.number.isRequired,
     webformatURL: PropTypes.string.isRequired,
     largeImageURL: PropTypes.string.isRequired,
