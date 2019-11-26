@@ -22,7 +22,11 @@ class App extends Component {
             totalHits: data.hits,
           }),
         )
-        .catch(error => error);
+        .catch(error =>
+          this.setState({
+            error,
+          }),
+        );
     }
   }
 
@@ -37,7 +41,11 @@ class App extends Component {
             page: 1,
           })),
         )
-        .catch(error => error);
+        .catch(error =>
+          this.setState({
+            error,
+          }),
+        );
     }
     if (prevState.page !== page && query) {
       apiService(query, page)
@@ -47,7 +55,11 @@ class App extends Component {
             scroll: state.scroll + 1500,
           })),
         )
-        .catch(error => error);
+        .catch(error =>
+          this.setState({
+            error,
+          }),
+        );
     }
 
     window.scrollTo({ top: prevState.scroll + 1500, behavior: 'smooth' });
@@ -69,11 +81,17 @@ class App extends Component {
   };
 
   render() {
-    const { totalHits } = this.state;
+    const { totalHits, error } = this.state;
     return (
       <div className={styles.app}>
-        <SearchForm onChange={this.handleChange} />
-        <Gallery totalHits={totalHits} handleClick={this.handleClick} />
+        {error ? (
+          <>${error.message}</>
+        ) : (
+          <>
+            <SearchForm onChange={this.handleChange} />
+            <Gallery totalHits={totalHits} handleClick={this.handleClick} />
+          </>
+        )}
       </div>
     );
   }
