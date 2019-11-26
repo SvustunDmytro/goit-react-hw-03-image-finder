@@ -8,13 +8,13 @@ import PhotoCard from '../../Components/PhotoCard/PhotoCard';
 class Gallery extends Component {
   state = {
     isLarge: false,
-    fullScrinPicture: '',
+    fullScreenPicture: '',
   };
 
   pictureZoom = el => {
     this.setState({
       isLarge: true,
-      fullScrinPicture: el,
+      fullScreenPicture: el,
     });
   };
 
@@ -24,13 +24,16 @@ class Gallery extends Component {
 
   render() {
     const { totalHits, handleClick } = this.props;
-    const { isLarge, fullScrinPicture } = this.state;
+    const { isLarge, fullScreenPicture } = this.state;
     return (
       <div className={styles.GalleryWrapper}>
         <ul className={styles.gallery}>
           <PhotoCard totalHits={totalHits} pictureZoom={this.pictureZoom} />
           {isLarge && (
-            <Modal onClose={this.onClose} fullScrinPicture={fullScrinPicture} />
+            <Modal
+              onClose={this.onClose}
+              fullScreenPicture={fullScreenPicture}
+            />
           )}
         </ul>
         <button type="button" className={styles.button} onClick={handleClick}>

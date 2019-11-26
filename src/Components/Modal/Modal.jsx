@@ -30,7 +30,7 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { fullScrinPicture } = this.props;
+    const { fullScreenPicture } = this.props;
     return (
       <div
         role="presentation"
@@ -40,8 +40,8 @@ export default class Modal extends Component {
       >
         <div className={styles.modal}>
           <img
-            src={fullScrinPicture.largeImageURL}
-            alt={fullScrinPicture.tags}
+            src={fullScreenPicture.largeImageURL}
+            alt={fullScreenPicture.tags}
           />
         </div>
       </div>
@@ -51,7 +51,7 @@ export default class Modal extends Component {
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  fullScrinPicture: PropTypes.shape({
+  fullScreenPicture: PropTypes.shape({
     id: PropTypes.number.isRequired,
     webformatURL: PropTypes.string.isRequired,
     largeImageURL: PropTypes.string.isRequired,
